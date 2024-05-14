@@ -33,29 +33,29 @@ def blog(request):
 	return render(request,'blog/blog.html',context)
 
 def contact(request):
-	home = Home.objects.all()
-	cate = Category.objects.all()
+	# home = Home.objects.all()
+	# cate = Category.objects.all()
 
-	context = {'home':home,'cate':cate}
+	# context = {'home':home,'cate':cate}
 
-	if request.method == "POST":
-		firstname = request.POST['fname']
-		lastname = request.POST['lname']
-		email  = request.POST['email']
-		subject = request.POST['subject']
-		message = request.POST['message']
+	# if request.method == "POST":
+	# 	firstname = request.POST['fname']
+	# 	lastname = request.POST['lname']
+	# 	email  = request.POST['email']
+	# 	subject = request.POST['subject']
+	# 	message = request.POST['message']
 
-		if len(firstname) > 4:
-			contact = Contact(first_name=firstname,last_name=lastname,email=email,subject=subject,message=message)
-			contact.save()
-			messages.success(request,'Successfully Form Submit')
-			return redirect('/contact')
-		else:
-			messages.error(request,'First Name Should Be more then 4 chars')
-			return redirect('/contact')
+	# 	if len(firstname) > 4:
+	# 		contact = Contact(first_name=firstname,last_name=lastname,email=email,subject=subject,message=message)
+	# 		contact.save()
+	# 		messages.success(request,'Successfully Form Submit')
+	# 		return redirect('/contact')
+	# 	else:
+	# 		messages.error(request,'First Name Should Be more then 4 chars')
+	# 		return redirect('/contact')
 
 
-	return render(request,'blog/contact.html',context)
+	return render(request,'blog/contact.html',)
 
 
 def category(request):
@@ -70,26 +70,26 @@ def single(request,slug):
 	cate = Category.objects.all()
 	post = Post.objects.filter(slug=slug).first()
 
-	comment = Comment.objects.filter(post=post)
+	# comment = Comment.objects.filter(post=post)
 	
 
-	if request.method == "POST":
-		name = request.POST['name']
-		email = request.POST['email']
-		postsno = request.POST.get('postsno')
-		website = request.POST['website']
-		message = request.POST['message']
+	# if request.method == "POST":
+	# 	name = request.POST['name']
+	# 	email = request.POST['email']
+	# 	postsno = request.POST.get('postsno')
+	# 	website = request.POST['website']
+	# 	message = request.POST['message']
 
-		post_data = Post.objects.get(sno=postsno)
+	# 	post_data = Post.objects.get(sno=postsno)
 		
-		comment = Comment(name=name,email=email,post=post_data,website=website,message=message)
-		comment.save()
-		messages.success(request,"Comment Successfully Submit")
+	# 	comment = Comment(name=name,email=email,post=post_data,website=website,message=message)
+	# 	comment.save()
+	# 	messages.success(request,"Comment Successfully Submit")
 
-		return redirect('/')
+	# 	return redirect('/')
 
 
-	context = {'home':home,'cate':cate,'post':post,'comment':comment}
+	context = {'home':home,'cate':cate,'post':post}
 	return render(request,'blog/single.html',context)
 
 

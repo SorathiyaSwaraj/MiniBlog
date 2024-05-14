@@ -17,16 +17,16 @@ class Home(models.Model):
 	def __str__(self):
 		return self.title
 
-class Contact(models.Model):
-	sno = models.AutoField(primary_key=True)
-	first_name = models.CharField(max_length=255,blank=True,null=True)
-	last_name = models.CharField(max_length=255,blank=True,null=True)
-	email = models.CharField(max_length=255,blank=True,null=True)
-	subject = models.CharField(max_length=255,blank=True,null=True)
-	message = models.TextField(blank=True,null=True)
+# class Contact(models.Model):
+# 	sno = models.AutoField(primary_key=True)
+# 	first_name = models.CharField(max_length=255,blank=True,null=True)
+# 	last_name = models.CharField(max_length=255,blank=True,null=True)
+# 	email = models.CharField(max_length=255,blank=True,null=True)
+# 	subject = models.CharField(max_length=255,blank=True,null=True)
+# 	message = models.TextField(blank=True,null=True)
 
-	def __str__(self):
-		return self.first_name
+# 	def __str__(self):
+# 		return self.first_name
 
 class Category(models.Model):
 	sno = models.AutoField(primary_key=True)
@@ -51,13 +51,13 @@ class Post(models.Model):
 		return self.title
 		
 
-class Comment(models.Model):
-	sno = models.AutoField(primary_key=True)
-	name = models.CharField(max_length=255,blank=True,null=True)
-	email = models.CharField(max_length=255,blank=True,null=True)
-	post = models.ForeignKey(Post,on_delete=models.CASCADE,null=True,blank=True)
-	website = models.CharField(max_length=255,blank=True,null=True)
-	message = models.TextField()
+# class Comment(models.Model):
+# 	sno = models.AutoField(primary_key=True)
+# 	name = models.CharField(max_length=255,blank=True,null=True)
+# 	email = models.CharField(max_length=255,blank=True,null=True)
+# 	post = models.ForeignKey(Post,on_delete=models.CASCADE,null=True,blank=True)
+# 	website = models.CharField(max_length=255,blank=True,null=True)
+# 	message = models.TextField()
 
-	def __str__(self):
-		return self.name
+# 	def __str__(self):
+# 		return self.name
