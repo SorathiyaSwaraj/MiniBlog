@@ -65,10 +65,39 @@ def category(request):
 	context = {'home':home,'cate':cate}
 	return render(request,'blog/category.html',context)
 
-def single(request,slug):
+# def single(request,slug):
+# 	home = Home.objects.all()
+# 	cate = Category.objects.all()
+# 	post = Post.objects.filter(slug=slug).first()
+
+# 	comment = Comment.objects.filter(post=post)
+	
+
+# 	if request.method == "POST":
+# 		name = request.POST['name']
+# 		email = request.POST['email']
+# 		postsno = request.POST.get('postsno')
+# 		website = request.POST['website']
+# 		message = request.POST['message']
+
+# 		post_data = Post.objects.get(sno=postsno)
+		
+# 		comment = Comment(name=name,email=email,post=post_data,website=website,message=message)
+# 		comment.save()
+# 		messages.success(request,"Comment Successfully Submit")
+
+# 		return redirect('/')
+
+
+# 	context = {'home':home,'cate':cate,'post':post,'comment':comment}
+# 	return render(request,'blog/single.html',context)
+
+
+
+def single(request,int):
 	home = Home.objects.all()
 	cate = Category.objects.all()
-	post = Post.objects.filter(slug=slug).first()
+	post = Post.objects.filter(sno=int).first()
 
 	comment = Comment.objects.filter(post=post)
 	
@@ -91,7 +120,6 @@ def single(request,slug):
 
 	context = {'home':home,'cate':cate,'post':post,'comment':comment}
 	return render(request,'blog/single.html',context)
-
 
 	
 
