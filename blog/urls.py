@@ -12,7 +12,7 @@ urlpatterns = [
     path('blog',views.blog,name="blog"),
     path('contact',views.contact,name="contact"),
     path('category',views.category,name="category"),
-    # path('<str:slug>/',views.single,name="single"),
-    path('<str:int>/',views.single,name="single"),
+    path('<str:slug>/',views.single,name="single"),
+    # path('<str:int>/',views.single,name="single"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

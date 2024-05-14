@@ -94,10 +94,10 @@ def category(request):
 
 
 
-def single(request,int):
+def single(request,slug):
 	home = Home.objects.all()
 	cate = Category.objects.all()
-	post = Post.objects.filter(sno=int).first()
+	post = Post.objects.filter(slug=slug).first()
 
 	# comment = Comment.objects.filter(post=post)
 	
