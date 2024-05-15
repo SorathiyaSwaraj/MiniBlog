@@ -126,7 +126,32 @@
       </div>
     </section>
 
+    <style>
+      .btn-container {
+      display: flex;
+      justify-content: center;
+    }
+    .btn {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        background-color: blueviolet;
+        color: #333;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-decoration: none;
+    }
+    .btn:hover {
+        background-color: #ccc;
+    }
+    </style>
+
+    <div class="btn-container">
+      <a href="" class="btn">Next</a>
+    </div>
 
 
+    <br>
     
     {% endblock body %}

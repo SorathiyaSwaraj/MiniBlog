@@ -54,15 +54,18 @@
           </div>
 
           <div class="col-8 text-right">
-            <nav class="site-navigation" role="navigation">
+            <nav class="site-navigation" role="navigation">              
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
+                <h2>{{request.user}}</h2>
                 <li><a href="/">Home</a></li>
                 <li><a href="/blog">Blog</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="extra/contact">Contact</a></li>
+                
                 {% for post in cate %}
                   
                 <li><a href="/?category={{post.sno | safe}}">{{post.title | safe}}</a></li>
                 {% endfor %}
+                <li><a href="/logout_view">Log Out</a></li>
                 
               </ul>
             </nav>

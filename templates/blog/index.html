@@ -3,7 +3,60 @@
     <!-- block -->
     
    {% load static %}
-     {% block body %}
+    {% block body %}
+    {% csrf_token %}
+
+    <style>
+    .btn-container {
+      display: flex;
+      justify-content: center;
+    }
+    .btn {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        background-color: lightblue;
+        color: #333;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-decoration: none;
+    }
+    .btn:hover {
+        background-color: #ccc;
+    }
+
+    .slogan {
+          font-size: 24px;
+          color: #333;
+          text-align: center;
+          margin-bottom: 20px;
+      }
+  </style>
+
+  <div class="slogan">
+      Make your life easy having gifts by Dear Zindagi 
+  </div>
+  <hr>
+  {% if user.is_authenticated %}
+
+  <div class="btn-container">
+    <a href="1" class="btn">Start reading</a>
+  </div>
+    
+  {% else %} 
+
+  <div class="btn-container">
+    <a href="/signupForm_view" class="btn">New User</a>
+  </div>
+  <br>
+    <div class="btn-container">
+      <a href="/login_view" class="btn">Get Started</a>
+    </div>
+
+  {% endif %}
+  
+  <hr>
       
 
     
@@ -11,6 +64,12 @@
       <div class="container">
         <div class="row align-items-stretch retro-layout-2">
 
+          
+          {% load static %}
+
+          <br>
+          
+          
 
           {% for post in posts %}
             {% if forloop.counter < 7 %}
