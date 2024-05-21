@@ -34,26 +34,6 @@ def blog(request):
 	return render(request,'blog/blog.html',context)
 
 def contact(request):
-	# home = Home.objects.all()
-	# cate = Category.objects.all()
-
-	# context = {'home':home,'cate':cate}
-
-	# if request.method == "POST":
-	# 	firstname = request.POST['fname']
-	# 	lastname = request.POST['lname']
-	# 	email  = request.POST['email']
-	# 	subject = request.POST['subject']
-	# 	message = request.POST['message']
-
-	# 	if len(firstname) > 4:
-	# 		contact = Contact(first_name=firstname,last_name=lastname,email=email,subject=subject,message=message)
-	# 		contact.save()
-	# 		messages.success(request,'Successfully Form Submit')
-	# 		return redirect('/contact')
-	# 	else:
-	# 		messages.error(request,'First Name Should Be more then 4 chars')
-	# 		return redirect('/contact')
 
 
 	return render(request,'blog/contact.html',)
@@ -66,32 +46,7 @@ def category(request):
 	context = {'home':home,'cate':cate}
 	return render(request,'blog/category.html',context)
 
-# def single(request,slug):
-# 	home = Home.objects.all()
-# 	cate = Category.objects.all()
-# 	post = Post.objects.filter(slug=slug).first()
 
-# 	comment = Comment.objects.filter(post=post)
-	
-
-# 	if request.method == "POST":
-# 		name = request.POST['name']
-# 		email = request.POST['email']
-# 		postsno = request.POST.get('postsno')
-# 		website = request.POST['website']
-# 		message = request.POST['message']
-
-# 		post_data = Post.objects.get(sno=postsno)
-		
-# 		comment = Comment(name=name,email=email,post=post_data,website=website,message=message)
-# 		comment.save()
-# 		messages.success(request,"Comment Successfully Submit")
-
-# 		return redirect('/')
-
-
-# 	context = {'home':home,'cate':cate,'post':post,'comment':comment}
-# 	return render(request,'blog/single.html',context)
 
 
 
@@ -210,3 +165,45 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("/home")
+
+def page_count(request, sno):
+
+	try:
+		post = Post.objects.all()
+		total_post = post.count() + 1
+
+		next = (sno+1)%total_post
+		if(next == 0):
+			next = next + 1
+
+		user = request.user
+		user.pageviews = user.pageviews + 1
+		user.total_pages = user.total_pages + 1
+
+		user.save()
+
+		return redirect('/' + str(next))
+	except Exception as e:
+		return redirect("/login_view")
+
+
+
+def gifts_view(request):
+
+    user = CustomUser.objects.get(username = request.user)
+    pageviews = user.pageviews
+    total_pages = user.total_pages
+    rewards = "{:.2f}".format(pageviews*0.10)
+    upi = user.upi
+
+    return render(request, 'gifts.html', {'pageviews' : pageviews, 'total_pages' : total_pages, 'rewards' : rewards, 'upi' : upi})
+
+def save_upi(request):
+
+    upi = request.POST.get("upi_id")
+    user = CustomUser.objects.get(username = request.user)
+    user.upi = upi
+
+    user.save()
+
+    return redirect('gifts_view')

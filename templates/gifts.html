@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+    <!-- block -->
+    
+   {% load static %}
+    {% block body %}
+    <style>
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            background-color: #ccc;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #ccc;
+        }
+
+        .progress-info {
+            text-align: center;
+            margin-bottom: 10px; /* Adjust as needed */
+        }
+
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        .progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #4caf50;
+            border-radius: 5px;
+            width: var(--progress);
+        }
+
+        img {
+            width: 50px;
+            height: 50px;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+    </style>
+
+    {% csrf_token %}
+    
+    <br>
+
+    {% load static %}
+    <h1><img src="{% static 'gifts.png' %}">Gifts:- {{pageviews}} </h1>
+
+    <h1>Your rewards:- {{rewards}}  <img src="{% static 'rupee.png' %}"></h1>
+      
+    <hr>
+    <br>
+    
+    <h2>Complete the task to get 2x rewards</h2>
+
+    <br>
+    <div class="progress-info">
+        Score: <span class="current"></span>/<span class="total"></span>
+    </div>
+    <div class="progress-bar">
+        <div class="progress" style="--progress: 50%;"></div>
+    </div>
+
+    <hr>
+
+    <h2>Your Upi is:- {{upi}}</h2> 
+    <br>
+
+    <h2>You will get rewarded on 2500 gifts in Your UPI id.</h2>
+
+
+    <br>
+    <form action="save_upi" method="post">
+        {% csrf_token %}
+        <label for="upi_id"><h2>Please Enter the correct UPI id for getting reward:- </h2></label>
+        <input type="text" id="upi_id" name="upi_id" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Enter a valid UPI ID" required><br>
+        <input type="submit">
+    </form>
+
+    <hr>
+
+    <br>
+    <div class="btn-container">
+        <a href="/1" class="btn">Start reading</a>
+    </div>
+    <br>
+
+    <script>
+        // Update progress dynamically
+        function updateProgress(total, current) {
+            let percentage = (current / total) * 100;
+            document.querySelector('.progress-info .current').textContent = current;
+            document.querySelector('.progress-info .total').textContent = total;
+            document.querySelector('.progress').style.setProperty('--progress', percentage + '%');
+        }
+
+        updateProgress(10000, {{total_pages}});
+
+    </script>
+
+ <!-- end block -->
+ 
+ {% endblock body %}

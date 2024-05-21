@@ -3,6 +3,55 @@
 {% load static %}
 {% block body %}
     
+<script>
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+      history.go(1);
+  };
+
+  // Check if the browser supports the HTML5 History API
+  if (window.history && window.history.pushState) {
+      // Listen for the popstate event (i.e., when the user navigates backward or forward)
+      window.addEventListener('popstate', function() {
+          // Reload the page
+          location.replace();
+      });
+  }
+</script>
+
+<!-- timmer -->
+<br>
+<b><div id="countdown" style="text-align: center; color: red; font-size: medium;"></div></b>
+
+    <script>
+    window.onload = function() {
+        var countdownElement = document.getElementById('countdown');
+        var endButton = document.getElementById('endButton');
+        
+        // Set the countdown end date (in this example, 5 minutes from the page load)
+        var endDate = new Date();
+        endDate.setSeconds(endDate.getSeconds() + 5);
+    
+        // Update the countdown every second
+        var countdownInterval = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = endDate - now;
+    
+            // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+            countdownElement.innerHTML = "Please wait ......" + seconds + "s";
+    
+            // If the countdown is finished, clear the interval
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = "Start reading and Scroll down to the end";
+                endButton.style.display = "block";
+                
+            }
+        }, 1000);
+    };
+    </script>
 
     
     <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url('{{post.image.url}}');">
@@ -147,10 +196,11 @@
     }
     </style>
 
+    <!-- next button -->
     <div class="btn-container">
-      <a href="" class="btn">Next</a>
+      <a href="/page_count/{{post.sno}}" class="btn" id="endButton" style="display:none;">Next</a>
     </div>
-
+    
 
     <br>
     

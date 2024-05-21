@@ -17,5 +17,9 @@ urlpatterns = [
     path('signupForm_view', views.signupForm_view, name="signupForm_view"),
     path('login_view', views.login_view, name="login_view"),
     path('logout_view', views.logout_view, name="logout_view"),
+    path('page_count/<int:sno>', views.page_count, name="page_count"),
+    path('gifts_view', views.gifts_view, name="gifts_view"),
+    path('save_upi', views.save_upi, name="save_upi"),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
